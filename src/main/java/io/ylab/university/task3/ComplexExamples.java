@@ -1,7 +1,12 @@
 package io.ylab.university.task3;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -136,25 +141,25 @@ public class ComplexExamples {
 
   public static void printTwoNumbersGivingTheSum(int[] arr, int desired) {
 
-    boolean isFound = false;
-    int i = 0;
+    if (arr == null) {
+      System.out.println("Given null");
+    }
+    else if (arr.length > 1) {
+      var set = new HashSet<>();
+      String result = "Not found";
 
-    if (arr.length > 0) {
-      while (!isFound && i < arr.length) {
-        for (int j = 1; j < arr.length; j++) {
-          if (arr[i] + arr[j] == desired) {
-            System.out.printf("[%d,%d]%n", arr[i], arr[j]);
-            isFound = true;
-          }
+      for (int value : arr) {
+        if (set.contains(desired - value)) {
+          result = String.format("[%d,%d]", desired - value, value);
+          break;
         }
-        i++;
+        set.add(value);
       }
-      if (!isFound) {
-        System.out.println("Not found");
-      }
+
+      System.out.println(result);
     }
     else {
-      System.out.println("Array is empty");
+      System.out.println("Array contains less than two numbers");
     }
   }
 
